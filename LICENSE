@@ -1,0 +1,129 @@
+﻿MIT License
+
+Copyright (c) 2026 Sergio Rosas Barrera
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+# ⚙️ 4. Código base (núcleo funcional)
+
+
+## 🔹 roles.py
+
+
+```python
+
+class Role:
+
+    def __init__(self, name, function):
+
+        self.name = name
+
+        self.function = function
+
+
+
+    def apply(self, x):
+
+        return self.function(x)
+
+
+🔹 rotation.py
+
+
+def rotate_roles(heads, roles, step):
+
+    assignments = {}
+
+    for i, head in enumerate(heads):
+
+        role_index = (i + step) % len(roles)
+
+        assignments[head] = roles[role_index]
+
+    return assignments
+
+
+🔹 metacognition.py
+
+
+def metacognitive_function(outputs):
+
+    # Simple aggregation (expand later)
+
+    return sum(outputs) / len(outputs)
+
+
+
+
+def coherence_score(outputs):
+
+    # Placeholder metric
+
+    return 1.0
+
+
+🔹 oetr_model.p (núcleo)
+
+from src.rotation import rotate_roles
+
+from src.metacognition import metacognitive_function
+
+
+
+class OETRModel:
+
+    def __init__(self, roles, heads):
+
+        self.roles = roles
+
+        self.heads = heads
+
+
+
+    def process(self, input_data):
+
+        all_outputs = []
+
+
+
+        for step in range(len(self.roles)):
+
+            assignments = rotate_roles(self.heads, self.roles, step)
+
+
+
+            step_outputs = []
+
+            for head, role in assignments.items():
+
+                output = role.apply(input_data)
+
+                step_outputs.append(output)
+
+
+
+            all_outputs.extend(step_outputs)
+
+
+
+        meta_output = metacognitive_function(all_outputs)
+
+        return meta_output
