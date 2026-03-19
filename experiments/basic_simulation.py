@@ -16,4 +16,7 @@ heads = [f"H{i}" for i in range(8)]
 
 model = OETRModel(roles, heads)
 
-print(model.process(10))
+input_data = 10
+output = model.process(input_data)
+
+print("Final Output:", output)
